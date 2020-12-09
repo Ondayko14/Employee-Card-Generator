@@ -1,7 +1,9 @@
+const { expect } = require('@jest/globals');
 const Intern = require('../lib/Intern');
 
-test('see if the Engineer object is being made', () =>{
-    const intern = new Intern('Joe');
+test('see if the Intern object is being made', () =>{
+    const intern = new Intern('Vanderbilt');
 
-    expect(intern.name).toBe('Joe');
+    expect(intern.getSchool()).toBe('Vanderbilt');
+    expect(intern.getRole()).toBe('Intern');
 });
