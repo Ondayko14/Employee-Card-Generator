@@ -3,19 +3,17 @@ const inquirer = require('inquirer');
 // const Engineer = require('./lib/Engineer');
 // const Intern = require('./lib/Intern');
 // const Manager = require('./lib/Manager');
-// const EngineerQuestions = require('./lib/EngineerQuestions');
-// const ManagerQuestions = require('./lib/ManagerQuestions');
-// const InternQuestions = require('./lib/InternQuestions');
+const nextEmployee = require('./lib/NextEmployee');
 const GenerateHTML = require('./lib/GenerateHTML');
 const fs = require('fs');
 const { validate } = require('@babel/types');
 const { generate } = require('rxjs');
 const Engineer = require('./lib/Engineer');
-const EngineerQuestions = require('./lib/EngineerQuestions');
-const EmployeeStorage = [];
+const employeeStorage = [];
 
 
 const init = () => {
+
     return inquirer.prompt([
         {
             type: 'input',
@@ -98,10 +96,28 @@ const init = () => {
                     return false;
                 }
             }
+        },
+        {
+            type: 'confirm',
+            name: 'anotherEmployee',
+            message: 'Would you like to add another employee?',
+            default: false
         }
-    ]);
+    ]).then(employeeData => {
+        employeeStorage.push(employeeData);
+        console.log(employeeStorage);
+        if(employeeData.anotherEmployee) {
+            return init();
+        } else {
+            return employeeData;
+        }
+    })
 };
 
-init().then(employeeData => {
+init()
+.then(employeeData => {
     return GenerateHTML(employeeData);
+})
+.then(roundOfData => {
+    return nextEmployee(roundOfData);
 });
