@@ -104,7 +104,6 @@ const init = (info) => {
     ]).then(employeeData => {
         info.storage.push(employeeData);
         if(employeeData.anotherEmployee) {
-            console.log(info.storage);
             return init(info);
         } else {
             return info;
@@ -117,7 +116,7 @@ init(info)
     return GenerateHTML(data);
 })
 .then(write => {
-    console.log(write)
+    console.log(write[0]);
 });
 
 
