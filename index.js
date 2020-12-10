@@ -115,6 +115,9 @@ const init = (info) => {
 init(info)
 .then((data) => {
     return GenerateHTML(data);
+})
+.then(write => {
+    console.log(write)
 });
 
 
