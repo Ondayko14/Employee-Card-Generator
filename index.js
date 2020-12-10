@@ -1,8 +1,18 @@
 const inquirer = require('inquirer');
+// const Employee = require('./lib/Employee');
+// const Engineer = require('./lib/Engineer');
+// const Intern = require('./lib/Intern');
+// const Manager = require('./lib/Manager');
+// const EngineerQuestions = require('./lib/EngineerQuestions');
+// const ManagerQuestions = require('./lib/ManagerQuestions');
+// const InternQuestions = require('./lib/InternQuestions');
+const GenerateHTML = require('./lib/GenerateHTML');
 const fs = require('fs');
 const { validate } = require('@babel/types');
+const { generate } = require('rxjs');
 
-function init() {
+
+const init = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -53,24 +63,15 @@ function init() {
     ]);
 };
 
-init().then((data) => {
-    if (data.role === 'Engineer') {
-        inquirer.prompt({
-            type: 'input',
-            name: 'github',
-            message: 'What is this Engineers github link?'
-        });
-    } else if(data.role === 'Manager') {
-        inquirer.prompt({
-            type: 'input',
-            name: 'officeNumber',
-            message: 'What is the office number of this manager?'
-        });
-    } else {
-        inquirer.prompt({
-            type: 'input',
-            name: 'school',
-            message: 'What is the name of this interns school?'
-        });
-    }
+init().then(employeeData => {
+    return GenerateHTML(employeeData);
 });
+
+    // if (data.role === 'Engineer') {
+    //     const EngineQs = EngineerQuestions(data);
+    //     console.log(EngineQs);
+    // } else if(data.role === 'Manager') {
+    //     ManagerQuestions(data);
+    // } else {
+    //     InternQuestions(data);
+    // }
