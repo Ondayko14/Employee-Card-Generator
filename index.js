@@ -105,13 +105,3 @@ const init = () => {
 init().then(employeeData => {
     return GenerateHTML(employeeData);
 });
-
-
-    // if (data.role === 'Engineer') {
-    //     const EngineQs = EngineerQuestions(data);
-    //     console.log(EngineQs);
-    // } else if(data.role === 'Manager') {
-    //     ManagerQuestions(data);
-    // } else {
-    //     InternQuestions(data);
-    // }
