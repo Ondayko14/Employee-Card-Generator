@@ -3,13 +3,12 @@ const GenerateHTML = require('./lib/GenerateHTML');
 const fs = require('fs');
 const { validate } = require('@babel/types');
 const { generate } = require('rxjs');
-const Engineer = require('./lib/Engineer');
 const writeFile = require('./lib/WriteToPage');
 const info = [];
 
-
+//Start The Application
 const init = (info) => {
-
+//setup an array to store multiple employees
     if(!info.storage) {
         info.storage = []
     }
@@ -103,6 +102,7 @@ const init = (info) => {
             default: false
         }
     ]).then(employeeData => {
+        //saves the data into the array
         info.storage.push(employeeData);
         if(employeeData.anotherEmployee) {
             return init(info);
@@ -114,9 +114,11 @@ const init = (info) => {
 
 init(info)
 .then((data) => {
+    //where the html is made
     return GenerateHTML(data);
 })
 .then(write => {
+    //writes over the existing index.html inside of the distribution folder
     writeFile(write);
 });
 
