@@ -1,19 +1,17 @@
 const inquirer = require('inquirer');
-// const Employee = require('./lib/Employee');
-// const Engineer = require('./lib/Engineer');
-// const Intern = require('./lib/Intern');
-// const Manager = require('./lib/Manager');
-const nextEmployee = require('./lib/NextEmployee');
 const GenerateHTML = require('./lib/GenerateHTML');
 const fs = require('fs');
 const { validate } = require('@babel/types');
 const { generate } = require('rxjs');
 const Engineer = require('./lib/Engineer');
-const employeeStorage = [];
+const info = [];
 
 
-const init = () => {
+const init = (info) => {
 
+    if(!info.storage) {
+        info.storage = []
+    }
     return inquirer.prompt([
         {
             type: 'input',
@@ -104,20 +102,20 @@ const init = () => {
             default: false
         }
     ]).then(employeeData => {
-        employeeStorage.push(employeeData);
-        console.log(employeeStorage);
+        info.storage.push(employeeData);
         if(employeeData.anotherEmployee) {
-            return init();
+            console.log(info.storage);
+            return init(info);
         } else {
-            return employeeData;
+            return info;
         }
     })
 };
 
-init()
-.then(employeeData => {
-    return GenerateHTML(employeeData);
-})
-.then(roundOfData => {
-    return nextEmployee(roundOfData);
+init(info)
+.then((data) => {
+    return GenerateHTML(data);
 });
+
+
+// module.exports = employeeStorage;
