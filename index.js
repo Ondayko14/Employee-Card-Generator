@@ -4,6 +4,7 @@ const fs = require('fs');
 const { validate } = require('@babel/types');
 const { generate } = require('rxjs');
 const Engineer = require('./lib/Engineer');
+const writeFile = require('./lib/WriteToPage');
 const info = [];
 
 
@@ -116,8 +117,6 @@ init(info)
     return GenerateHTML(data);
 })
 .then(write => {
-    console.log(write[0]);
+    writeFile(write);
 });
 
-
-// module.exports = employeeStorage;

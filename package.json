@@ -4,7 +4,8 @@
   "description": "A generator for employee information",
   "main": "index.js",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "dist": "dist"
   },
   "dependencies": {
     "inquirer": "^7.3.3",
