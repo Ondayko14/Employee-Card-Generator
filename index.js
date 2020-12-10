@@ -10,6 +10,9 @@ const GenerateHTML = require('./lib/GenerateHTML');
 const fs = require('fs');
 const { validate } = require('@babel/types');
 const { generate } = require('rxjs');
+const Engineer = require('./lib/Engineer');
+const EngineerQuestions = require('./lib/EngineerQuestions');
+const EmployeeStorage = [];
 
 
 const init = () => {
@@ -59,6 +62,42 @@ const init = () => {
             message: "What is the role of this employee?",
             choices: ['Engineer', 'Manager', 'Intern'],
             default: 'intern'
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is this Engineers github link?',
+            when: ({role}) => {
+                if(role === 'Engineer') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What is the name of this Interns current School?',
+            when: ({role}) => {
+                if(role === 'Intern') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'office',
+            message: "What is the office number of this Manager?",
+            when: ({role}) => {
+                if(role === 'Manager') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
     ]);
 };
@@ -66,6 +105,7 @@ const init = () => {
 init().then(employeeData => {
     return GenerateHTML(employeeData);
 });
+
 
     // if (data.role === 'Engineer') {
     //     const EngineQs = EngineerQuestions(data);
