@@ -1,0 +1,13 @@
+a, u {
+    text-decoration: none;
+    color: black;
+}
+
+article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    height: 9rem;
+    color: white;
+}
